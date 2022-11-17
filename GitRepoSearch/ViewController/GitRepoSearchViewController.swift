@@ -120,6 +120,10 @@ extension GitRepoSearchViewController: UISearchBarDelegate {
             return true
         }
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
 }
 
 // MARK: - UIScrollViewDelegate
