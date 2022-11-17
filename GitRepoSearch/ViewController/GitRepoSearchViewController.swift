@@ -14,6 +14,7 @@ final class GitRepoSearchViewController: UIViewController {
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var rateLimitView: UIView!
     @IBOutlet weak var resultTableView: UITableView!
     
     var viewModel: GitRepoSearchViewModel!
@@ -57,12 +58,14 @@ final class GitRepoSearchViewController: UIViewController {
                     self?.loadingView.isHidden = true
                     self?.errorView.isHidden = true
                     self?.emptyView.isHidden = true
+                    self?.rateLimitView.isHidden = true
                     self?.resultTableView.isHidden = true
                 case .loading(true):
                     self?.initialView.isHidden = true
                     self?.loadingView.isHidden = false
                     self?.errorView.isHidden = true
                     self?.emptyView.isHidden = true
+                    self?.rateLimitView.isHidden = true
                     self?.resultTableView.isHidden = true
                 case .loading(false):
                     // インジケータを表示しない読み込み中に関しては何もしない
@@ -72,6 +75,7 @@ final class GitRepoSearchViewController: UIViewController {
                     self?.loadingView.isHidden = true
                     self?.errorView.isHidden = true
                     self?.emptyView.isHidden = true
+                    self?.rateLimitView.isHidden = true
                     self?.resultTableView.isHidden = false
                     self?.refreshControl.endRefreshing()
                     self?.resultTableView.reloadData()
@@ -81,13 +85,24 @@ final class GitRepoSearchViewController: UIViewController {
                     self?.loadingView.isHidden = true
                     self?.errorView.isHidden = true
                     self?.emptyView.isHidden = false
+                    self?.rateLimitView.isHidden = true
                     self?.resultTableView.isHidden = true
                 case .error:
                     self?.initialView.isHidden = true
                     self?.loadingView.isHidden = true
                     self?.errorView.isHidden = false
                     self?.emptyView.isHidden = true
+                    self?.rateLimitView.isHidden = true
                     self?.resultTableView.isHidden = true
+                case .rateLimit:
+                    self?.initialView.isHidden = true
+                    self?.loadingView.isHidden = true
+                    self?.errorView.isHidden = true
+                    self?.emptyView.isHidden = true
+                    self?.rateLimitView.isHidden = false
+                    self?.resultTableView.isHidden = true
+                    // 入力も初期化しておく
+                    self?.searchBar.text = ""
                 }
         })
         .store(in: &subscriptions)
@@ -97,6 +112,10 @@ final class GitRepoSearchViewController: UIViewController {
     @objc func refresh() {
         // Pull To Refresh
         viewModel.doAction(.reloadSearchResult)
+    }
+    
+    @IBAction func tappedRateLimitConfirmButton(_ sender: Any) {
+        viewModel.doAction(.checkRateLimitation)
     }
 }
 

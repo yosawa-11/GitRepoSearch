@@ -34,6 +34,15 @@ final class GithubAPIClient {
                     return
                 }
                 
+                // レート制限に引っかかっているかチェック
+                if let httpURLResponse = response as? HTTPURLResponse,
+                   httpURLResponse.statusCode == 403,
+                   let remainingString = httpURLResponse.value(forHTTPHeaderField: "x-ratelimit-remaining"),
+                   Int(remainingString) == 0 {
+                    completion(.failure(.rateLimitError))
+                    return
+                }
+                
                 guard let data = data,
                       let responseModel = try? self?.jsonDecoder.decode(T.ResponseType.self, from: data) else {
                     completion(.failure(.parseError))
@@ -50,5 +59,6 @@ final class GithubAPIClient {
 
 enum GithubAPIError: Error {
     case parseError
+    case rateLimitError
     case unknown(Error?)
 }

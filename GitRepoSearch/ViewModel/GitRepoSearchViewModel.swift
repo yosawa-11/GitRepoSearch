@@ -38,21 +38,33 @@ final class GitRepoSearchViewModel {
                 guard self?.searchWord == word else { return }
                 
                 self?.state.send(.loading(isShowActivityIndicator: true)) // 検索ワードを変更した場合のみインジケータを表示
-                self?.sendRequest(action: action, searchWord: word)
+                self?.sendSearchRequest(action: action, searchWord: word)
             }
         case .reloadSearchResult:
             state.send(.loading(isShowActivityIndicator: false))
-            sendRequest(action: action, searchWord: searchWord)
+            sendSearchRequest(action: action, searchWord: searchWord)
         case .getNextSearchResult:
             // 読み込み中でない場合のみ実施
             if case .loading = state.value { } else {
                 state.send(.loading(isShowActivityIndicator: false))
-                sendRequest(action: action, searchWord: searchWord, page: currentPage + 1)
+                sendSearchRequest(action: action, searchWord: searchWord, page: currentPage + 1)
+            }
+        case .checkRateLimitation:
+            // レート制限のチェック
+            state.send(.loading(isShowActivityIndicator: true))
+            let request = GitRateLimitRequest()
+            client.exec(request: request) { [weak self] result in
+                switch result {
+                case .success(let response) where response.resources.search.remaining > 0:
+                    self?.state.send(.initial)
+                default:
+                    self?.state.send(.rateLimit)
+                }
             }
         }
     }
     
-    private func sendRequest(action: GitRepoSearchAction, searchWord: String, page: Int = 1) {
+    private func sendSearchRequest(action: GitRepoSearchAction, searchWord: String, page: Int = 1) {
         let request = GitRepoSearchRequest(query: searchWord, page: page)
         client.exec(request: request) { [weak self] result in
             self?.handle(action: action, page: page, result: result)
@@ -79,9 +91,14 @@ final class GitRepoSearchViewModel {
             items = items + response.items
             currentPage = page
             state.send(.completed)
+        case (.failure(.rateLimitError), _):
+            state.send(.rateLimit)
         case (.failure(let error), _):
             print(error)
             state.send(.error)
+        case (_, .checkRateLimitation):
+            // 実行されないので何もしない
+            break
         }
     }
 }

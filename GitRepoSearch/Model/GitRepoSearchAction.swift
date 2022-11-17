@@ -11,4 +11,5 @@ enum GitRepoSearchAction {
     case changeSearchWord(String)
     case reloadSearchResult
     case getNextSearchResult
+    case checkRateLimitation
 }

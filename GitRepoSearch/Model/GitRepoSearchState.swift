@@ -11,6 +11,7 @@ enum GitRepoSearchState {
     case initial
     case completed
     case empty
+    case rateLimit
     case error
     case loading(isShowActivityIndicator: Bool)
 }

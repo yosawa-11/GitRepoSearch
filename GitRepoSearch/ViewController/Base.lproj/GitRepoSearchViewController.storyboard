@@ -92,8 +92,38 @@
                                             <constraint firstItem="peI-0H-LJa" firstAttribute="centerX" secondItem="eHI-2o-qHM" secondAttribute="centerX" id="dgr-gT-BkN"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7f-33-2kC">
+                                        <rect key="frame" x="0.0" y="200" width="414" height="50"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YKx-Pf-TJi">
+                                                <rect key="frame" x="85.5" y="-4.5" width="243" height="59.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ただいまアクセスを制限中です" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOo-Zi-dbe">
+                                                        <rect key="frame" x="0.0" y="0.0" width="243" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6T1-jW-zcz">
+                                                        <rect key="frame" x="81" y="28.5" width="81.5" height="31"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="確認する"/>
+                                                        <connections>
+                                                            <action selector="tappedRateLimitConfirmButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6lq-Ue-2Le"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="YKx-Pf-TJi" firstAttribute="centerY" secondItem="t7f-33-2kC" secondAttribute="centerY" id="cSy-V1-2w7"/>
+                                            <constraint firstAttribute="height" constant="50" id="hZ6-ch-zku"/>
+                                            <constraint firstItem="YKx-Pf-TJi" firstAttribute="centerX" secondItem="t7f-33-2kC" secondAttribute="centerX" id="qUp-0h-Ozb"/>
+                                        </constraints>
+                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="epK-dz-vWe">
-                                        <rect key="frame" x="0.0" y="200" width="414" height="567"/>
+                                        <rect key="frame" x="0.0" y="250" width="414" height="517"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                 </subviews>
@@ -116,6 +146,7 @@
                         <outlet property="errorView" destination="ml3-AA-fHJ" id="t19-Zt-kbU"/>
                         <outlet property="initialView" destination="LhC-lB-bHY" id="mCA-2N-uGA"/>
                         <outlet property="loadingView" destination="Of7-3s-9xm" id="3aV-hV-O88"/>
+                        <outlet property="rateLimitView" destination="t7f-33-2kC" id="sHP-Qv-T6W"/>
                         <outlet property="resultTableView" destination="epK-dz-vWe" id="7t8-HR-87D"/>
                         <outlet property="searchBar" destination="OmY-hd-jo4" id="2kE-Mc-pJn"/>
                     </connections>

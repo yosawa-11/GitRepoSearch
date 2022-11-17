@@ -29,6 +29,10 @@
 		A5FC640B292627BC007FC895 /* UITableView+DequeueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC640A292627BC007FC895 /* UITableView+DequeueCell.swift */; };
 		A5FC640D292679CB007FC895 /* PagingIndicatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC640C292679CB007FC895 /* PagingIndicatorTableViewCell.swift */; };
 		A5FC640F292679E1007FC895 /* PagingIndicatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5FC640E292679E1007FC895 /* PagingIndicatorTableViewCell.xib */; };
+		A5FC641129267ED1007FC895 /* GitRateLimitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC641029267ED1007FC895 /* GitRateLimitRequest.swift */; };
+		A5FC641329267F13007FC895 /* GitRateLimitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC641229267F13007FC895 /* GitRateLimitResponse.swift */; };
+		A5FC641529267FE8007FC895 /* GitRateLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC641429267FE8007FC895 /* GitRateLimit.swift */; };
+		A5FC64172926810D007FC895 /* GitRateLimitResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC64162926810D007FC895 /* GitRateLimitResources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,10 @@
 		A5FC640A292627BC007FC895 /* UITableView+DequeueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+DequeueCell.swift"; sourceTree = "<group>"; };
 		A5FC640C292679CB007FC895 /* PagingIndicatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingIndicatorTableViewCell.swift; sourceTree = "<group>"; };
 		A5FC640E292679E1007FC895 /* PagingIndicatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PagingIndicatorTableViewCell.xib; sourceTree = "<group>"; };
+		A5FC641029267ED1007FC895 /* GitRateLimitRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRateLimitRequest.swift; sourceTree = "<group>"; };
+		A5FC641229267F13007FC895 /* GitRateLimitResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRateLimitResponse.swift; sourceTree = "<group>"; };
+		A5FC641429267FE8007FC895 /* GitRateLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRateLimit.swift; sourceTree = "<group>"; };
+		A5FC64162926810D007FC895 /* GitRateLimitResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRateLimitResources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +147,10 @@
 				A5FC63FF29260D87007FC895 /* GitRepoSearchRequest.swift */,
 				A5FC640129261A10007FC895 /* GitRepoSearchAction.swift */,
 				A5FC640329261A72007FC895 /* GitRepoSearchState.swift */,
+				A5FC641029267ED1007FC895 /* GitRateLimitRequest.swift */,
+				A5FC641229267F13007FC895 /* GitRateLimitResponse.swift */,
+				A5FC641429267FE8007FC895 /* GitRateLimit.swift */,
+				A5FC64162926810D007FC895 /* GitRateLimitResources.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5FC641129267ED1007FC895 /* GitRateLimitRequest.swift in Sources */,
 				A5FC63ED2925FE2A007FC895 /* GitRepoSearchResultTableViewCell.swift in Sources */,
 				A5FC63FB292605B6007FC895 /* GithubAPIRequest.swift in Sources */,
 				A5FC63F4292603C1007FC895 /* GitRepoItem.swift in Sources */,
@@ -252,7 +265,10 @@
 				A5FC6407292625BD007FC895 /* UITableView+RegisterNib.swift in Sources */,
 				A5FC640029260D87007FC895 /* GitRepoSearchRequest.swift in Sources */,
 				A5FC63F9292604D0007FC895 /* APIRequest.swift in Sources */,
+				A5FC64172926810D007FC895 /* GitRateLimitResources.swift in Sources */,
+				A5FC641529267FE8007FC895 /* GitRateLimit.swift in Sources */,
 				A5FC63F229260307007FC895 /* GitRepoSearchResponse.swift in Sources */,
+				A5FC641329267F13007FC895 /* GitRateLimitResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
