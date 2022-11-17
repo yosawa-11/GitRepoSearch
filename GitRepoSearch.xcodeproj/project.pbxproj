@@ -16,6 +16,8 @@
 		A5FC63EB2925FDF6007FC895 /* GitRepoSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC63EA2925FDF6007FC895 /* GitRepoSearchViewModel.swift */; };
 		A5FC63ED2925FE2A007FC895 /* GitRepoSearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC63EC2925FE2A007FC895 /* GitRepoSearchResultTableViewCell.swift */; };
 		A5FC63EF2925FE56007FC895 /* GitRepoSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5FC63EE2925FE56007FC895 /* GitRepoSearchResultTableViewCell.xib */; };
+		A5FC63F229260307007FC895 /* GitRepoSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC63F129260307007FC895 /* GitRepoSearchResponse.swift */; };
+		A5FC63F4292603C1007FC895 /* GitRepoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC63F3292603C1007FC895 /* GitRepoItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		A5FC63EA2925FDF6007FC895 /* GitRepoSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepoSearchViewModel.swift; sourceTree = "<group>"; };
 		A5FC63EC2925FE2A007FC895 /* GitRepoSearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepoSearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		A5FC63EE2925FE56007FC895 /* GitRepoSearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GitRepoSearchResultTableViewCell.xib; sourceTree = "<group>"; };
+		A5FC63F129260307007FC895 /* GitRepoSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepoSearchResponse.swift; sourceTree = "<group>"; };
+		A5FC63F3292603C1007FC895 /* GitRepoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepoItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 			children = (
 				A5FC63D32925FB29007FC895 /* AppDelegate.swift */,
 				A5FC63D52925FB29007FC895 /* SceneDelegate.swift */,
+				A5FC63F029260283007FC895 /* Model */,
 				A5FC63E92925FC22007FC895 /* View */,
 				A5FC63E82925FC1C007FC895 /* ViewModel */,
 				A5FC63E72925FC12007FC895 /* ViewController */,
@@ -98,6 +103,15 @@
 				A5FC63EE2925FE56007FC895 /* GitRepoSearchResultTableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A5FC63F029260283007FC895 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A5FC63F129260307007FC895 /* GitRepoSearchResponse.swift */,
+				A5FC63F3292603C1007FC895 /* GitRepoItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,10 +187,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5FC63ED2925FE2A007FC895 /* GitRepoSearchResultTableViewCell.swift in Sources */,
+				A5FC63F4292603C1007FC895 /* GitRepoItem.swift in Sources */,
 				A5FC63D82925FB29007FC895 /* GitRepoSearchViewController.swift in Sources */,
 				A5FC63D42925FB29007FC895 /* AppDelegate.swift in Sources */,
 				A5FC63D62925FB29007FC895 /* SceneDelegate.swift in Sources */,
 				A5FC63EB2925FDF6007FC895 /* GitRepoSearchViewModel.swift in Sources */,
+				A5FC63F229260307007FC895 /* GitRepoSearchResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
