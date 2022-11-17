@@ -32,11 +32,11 @@ final class GithubAPIClient {
                 
                 guard let data = data,
                       let responseModel = try? self?.jsonDecoder.decode(T.ResponseType.self, from: data) else {
-                    print("parse error: \(data)")
+//                    print("parse error: \(data)")
                     completion(.failure(.parseError))
                     return
                 }
-                print(String(data: data, encoding: .utf8))
+//                print(String(data: data, encoding: .utf8))
                 
                 completion(.success(responseModel))
             }

@@ -27,7 +27,7 @@ extension APIRequest {
             components?.queryItems = parameters.compactMap {
                 switch $0.value {
                 case is String:
-                    return URLQueryItem(name: $0.key, value: ($0.value as? String)?.urlEncoded)
+                    return URLQueryItem(name: $0.key, value: ($0.value as? String))
                 case is NSNumber:
                     return URLQueryItem(name: $0.key, value: ($0.value as? NSNumber)?.stringValue)
                 default:
@@ -53,10 +53,4 @@ enum HTTPMethod: String {
 enum Encoding {
     // 最低限のためURLエンコードのみ実装
     case URLEncoding
-}
-
-private extension String {
-    var urlEncoded: String? {
-        addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-    }
 }
