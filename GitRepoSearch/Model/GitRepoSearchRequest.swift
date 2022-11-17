@@ -28,10 +28,12 @@ struct GitRepoSearchRequest: GithubAPIRequest {
     var parameters: [String: Any] {
         [
             "q": query,
-            "page": page
+            "page": page,
+            "per_page": Self.pageSize
         ]
     }
     
     let query: String
     let page: Int
+    static let pageSize = 30
 }
