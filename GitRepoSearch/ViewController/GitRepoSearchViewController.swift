@@ -11,6 +11,8 @@ final class GitRepoSearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultTableView: UITableView!
     
+    var client: GithubAPIClient!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +22,12 @@ final class GitRepoSearchViewController: UIViewController {
         resultTableView.dataSource = self
         // セルの繰り返し表示を消す
         resultTableView.tableFooterView = UIView()
+        
+        // TODO: お試しリクエスト
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        client = GithubAPIClient(urlSession: URLSession(configuration: .default), jsonDecoder: jsonDecoder)
+        client.exec(request: GitRepoSearchRequest(query: "ほげほげ", page: 1), completion: { _ in })
     }
 }
 

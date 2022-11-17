@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GitRepoSearchResponse: Decodable {
+struct GitRepoSearchResponse: Decodable {    
     let totalCount: Int
     let incompleteResults: Bool
     let items: [GitRepoItem]

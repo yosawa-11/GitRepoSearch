@@ -7,7 +7,8 @@
 
 import Foundation
 
+// NOTE: 最低限の使用するものだけを定義
 struct GitRepoItem: Decodable {
-    let title: String
-    let description: String
+    let name: String
+    let description: String?
 }
