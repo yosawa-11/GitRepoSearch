@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -36,11 +37,21 @@
                             <constraint firstAttribute="height" constant="48" id="fb3-9m-mHn"/>
                         </constraints>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2b-BB-c5p">
+                        <rect key="frame" x="16" y="63" width="398" height="1"/>
+                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="7Ls-wj-WC1"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="g2b-BB-c5p" secondAttribute="trailing" id="8Y2-il-dGR"/>
                     <constraint firstItem="guo-3V-RnL" firstAttribute="leading" secondItem="leI-ob-hH2" secondAttribute="leading" constant="16" id="F6E-O3-Dgx"/>
+                    <constraint firstItem="g2b-BB-c5p" firstAttribute="leading" secondItem="leI-ob-hH2" secondAttribute="leading" constant="16" id="ft7-pf-fXx"/>
                     <constraint firstItem="guo-3V-RnL" firstAttribute="top" secondItem="leI-ob-hH2" secondAttribute="top" constant="8" id="mEc-5q-M3e"/>
                     <constraint firstAttribute="bottom" secondItem="guo-3V-RnL" secondAttribute="bottom" constant="8" id="n4d-uT-Dnf"/>
+                    <constraint firstAttribute="bottom" secondItem="g2b-BB-c5p" secondAttribute="bottom" id="sSa-Am-oBk"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="guo-3V-RnL" secondAttribute="trailing" constant="8" id="wqV-Nu-ayg"/>
                 </constraints>
             </tableViewCellContentView>
@@ -51,4 +62,9 @@
             <point key="canvasLocation" x="-7.2463768115942031" y="9.7826086956521738"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

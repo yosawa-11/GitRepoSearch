@@ -27,6 +27,8 @@
 		A5FC6407292625BD007FC895 /* UITableView+RegisterNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC6406292625BD007FC895 /* UITableView+RegisterNib.swift */; };
 		A5FC64092926278F007FC895 /* NSObject+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC64082926278F007FC895 /* NSObject+Name.swift */; };
 		A5FC640B292627BC007FC895 /* UITableView+DequeueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC640A292627BC007FC895 /* UITableView+DequeueCell.swift */; };
+		A5FC640D292679CB007FC895 /* PagingIndicatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC640C292679CB007FC895 /* PagingIndicatorTableViewCell.swift */; };
+		A5FC640F292679E1007FC895 /* PagingIndicatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5FC640E292679E1007FC895 /* PagingIndicatorTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		A5FC6406292625BD007FC895 /* UITableView+RegisterNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+RegisterNib.swift"; sourceTree = "<group>"; };
 		A5FC64082926278F007FC895 /* NSObject+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Name.swift"; sourceTree = "<group>"; };
 		A5FC640A292627BC007FC895 /* UITableView+DequeueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+DequeueCell.swift"; sourceTree = "<group>"; };
+		A5FC640C292679CB007FC895 /* PagingIndicatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingIndicatorTableViewCell.swift; sourceTree = "<group>"; };
+		A5FC640E292679E1007FC895 /* PagingIndicatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PagingIndicatorTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 			children = (
 				A5FC63EC2925FE2A007FC895 /* GitRepoSearchResultTableViewCell.swift */,
 				A5FC63EE2925FE56007FC895 /* GitRepoSearchResultTableViewCell.xib */,
+				A5FC640C292679CB007FC895 /* PagingIndicatorTableViewCell.swift */,
+				A5FC640E292679E1007FC895 /* PagingIndicatorTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -216,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5FC63E02925FB2C007FC895 /* LaunchScreen.storyboard in Resources */,
+				A5FC640F292679E1007FC895 /* PagingIndicatorTableViewCell.xib in Resources */,
 				A5FC63DD2925FB2C007FC895 /* Assets.xcassets in Resources */,
 				A5FC63DB2925FB29007FC895 /* GitRepoSearchViewController.storyboard in Resources */,
 				A5FC63EF2925FE56007FC895 /* GitRepoSearchResultTableViewCell.xib in Resources */,
@@ -238,6 +245,7 @@
 				A5FC640B292627BC007FC895 /* UITableView+DequeueCell.swift in Sources */,
 				A5FC640229261A10007FC895 /* GitRepoSearchAction.swift in Sources */,
 				A5FC64092926278F007FC895 /* NSObject+Name.swift in Sources */,
+				A5FC640D292679CB007FC895 /* PagingIndicatorTableViewCell.swift in Sources */,
 				A5FC63D62925FB29007FC895 /* SceneDelegate.swift in Sources */,
 				A5FC63EB2925FDF6007FC895 /* GitRepoSearchViewModel.swift in Sources */,
 				A5FC640429261A72007FC895 /* GitRepoSearchState.swift in Sources */,

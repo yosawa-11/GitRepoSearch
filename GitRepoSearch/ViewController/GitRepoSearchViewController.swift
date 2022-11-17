@@ -36,6 +36,7 @@ final class GitRepoSearchViewController: UIViewController {
         resultTableView.delegate = self
         resultTableView.dataSource = self
         resultTableView.register(GitRepoSearchResultTableViewCell.self)
+        resultTableView.register(PagingIndicatorTableViewCell.self)
         // セルの繰り返し表示を消す
         resultTableView.tableFooterView = UIView()
         
@@ -57,12 +58,15 @@ final class GitRepoSearchViewController: UIViewController {
                     self?.errorView.isHidden = true
                     self?.emptyView.isHidden = true
                     self?.resultTableView.isHidden = true
-                case .loading:
+                case .loading(true):
                     self?.initialView.isHidden = true
                     self?.loadingView.isHidden = false
                     self?.errorView.isHidden = true
                     self?.emptyView.isHidden = true
                     self?.resultTableView.isHidden = true
+                case .loading(false):
+                    // インジケータを表示しない読み込み中に関しては何もしない
+                    break
                 case .completed:
                     self?.initialView.isHidden = true
                     self?.loadingView.isHidden = true
@@ -71,6 +75,7 @@ final class GitRepoSearchViewController: UIViewController {
                     self?.resultTableView.isHidden = false
                     self?.refreshControl.endRefreshing()
                     self?.resultTableView.reloadData()
+                    self?.resultTableView.flashScrollIndicators()
                 case .empty:
                     self?.initialView.isHidden = true
                     self?.loadingView.isHidden = true
@@ -110,17 +115,60 @@ extension GitRepoSearchViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: - UIScrollViewDelegate
+extension GitRepoSearchViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // ページングが有効な場合のみ、スクロール量をチェック
+        guard viewModel.hasNext else { return }
+        
+        let scrollPositon = scrollView.contentOffset.y
+        let margin: CGFloat = 44
+        
+        // スクロールが最下部の要素になったら次を取得
+        if scrollPositon > scrollView.contentSize.height - scrollView.bounds.height - margin {
+            viewModel.doAction(.getNextSearchResult)
+        }
+    }
+}
+
 extension GitRepoSearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+private enum GitRepoSearchSection: Int {
+    case gitRepoItemCell = 0
+    case pagingIndicatorCell = 1
 }
 
 extension GitRepoSearchViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // 次の要素がある場合は読み込み用のセクションを追加するため2として返す
+        viewModel.hasNext ? 2 : 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.items.count
+        switch GitRepoSearchSection(rawValue: section) {
+        case .gitRepoItemCell:
+            return viewModel.items.count
+        case .pagingIndicatorCell:
+            return 1
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(cellClass: GitRepoSearchResultTableViewCell.self, for: indexPath)
-        cell.apply(item: viewModel.items[indexPath.row])
-        return cell
+        switch GitRepoSearchSection(rawValue: indexPath.section) {
+        case .gitRepoItemCell:
+            let cell = tableView.dequeueReusableCell(cellClass: GitRepoSearchResultTableViewCell.self, for: indexPath)
+            cell.apply(item: viewModel.items[indexPath.row])
+            return cell
+        case .pagingIndicatorCell:
+            return tableView.dequeueReusableCell(cellClass: PagingIndicatorTableViewCell.self, for: indexPath)
+        default:
+            return UITableViewCell()
+        }
     }
 }

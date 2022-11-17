@@ -9,8 +9,8 @@ import Foundation
 
 enum GitRepoSearchState {
     case initial
-    case completed(items: [GitRepoItem], currentPage: Int, hasNext: Bool)
+    case completed
     case empty
     case error
-    case loading
+    case loading(isShowActivityIndicator: Bool)
 }
