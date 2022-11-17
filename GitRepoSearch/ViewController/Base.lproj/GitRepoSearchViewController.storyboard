@@ -16,9 +16,32 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-hd-jo4">
+                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="epK-dz-vWe">
+                                <rect key="frame" x="0.0" y="95" width="414" height="767"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="OmY-hd-jo4" secondAttribute="leading" id="04b-iH-KZh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OmY-hd-jo4" secondAttribute="trailing" id="3eI-SJ-ebR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="epK-dz-vWe" secondAttribute="bottom" id="DYh-0n-bwI"/>
+                            <constraint firstItem="epK-dz-vWe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RXR-S0-lVd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="epK-dz-vWe" secondAttribute="trailing" id="Rjm-3I-zsX"/>
+                            <constraint firstItem="epK-dz-vWe" firstAttribute="top" secondItem="OmY-hd-jo4" secondAttribute="bottom" id="ZxL-l9-8yr"/>
+                            <constraint firstItem="OmY-hd-jo4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tz1-k0-NaT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="resultTableView" destination="epK-dz-vWe" id="7t8-HR-87D"/>
+                        <outlet property="searchBar" destination="OmY-hd-jo4" id="2kE-Mc-pJn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

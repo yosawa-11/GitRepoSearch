@@ -8,4 +8,6 @@
 import UIKit
 
 final class GitRepoSearchResultTableViewCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descLabel: UILabel!
 }
