@@ -12,7 +12,7 @@ final class GitRepoSearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var descLabel: UILabel!
     
     func apply(item: GitRepoItem) {
-        titleLabel.text = item.name
+        titleLabel.text = item.fullName
         descLabel.text = item.description
     }
 }
