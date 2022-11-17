@@ -31,31 +31,38 @@ final class GitRepoSearchViewModel {
         switch action {
         case .changeSearchWord(let word):
             searchWord = word
-            // TODO: 流量調整
+            
             guard !word.isEmpty else {
                 state.send(.initial)
                 return
             }
-                        
+            
             // 実リクエストを投げるのは少し待ってから行う
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 // 検索ワードが変更されているようであればリクエストは投げない
                 guard self?.searchWord == word else { return }
                 
                 self?.state.send(.loading)
-                let request = GitRepoSearchRequest(query: word, page: 1)
-                self?.client.exec(request: request) { [weak self] result in
-                    self?.handle(action: action, result: result)
-                }
+                self?.sendRequest(action: action, searchWord: word)
             }
+        case .reloadSearchResult:
+            sendRequest(action: action, searchWord: searchWord)
         default:
             break
         }
     }
     
+    private func sendRequest(action: GitRepoSearchAction, searchWord: String) {
+        let request = GitRepoSearchRequest(query: searchWord, page: 1)
+        client.exec(request: request) { [weak self] result in
+            self?.handle(action: action, result: result)
+        }
+    }
+    
     private func handle(action: GitRepoSearchAction, result: Result<GitRepoSearchResponse, GithubAPIError>) {
         switch (result, action) {
-        case (.success(let response), .changeSearchWord(_)):
+        case (.success(let response), .changeSearchWord(_)),
+            (.success(let response), .reloadSearchResult):
             guard response.totalCount != 0 else {
                 // 0件パターン
                 state.send(.empty)

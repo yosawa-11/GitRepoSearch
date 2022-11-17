@@ -20,6 +20,8 @@ final class GitRepoSearchViewController: UIViewController {
     
     var subscriptions = Set<AnyCancellable>()
     
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +38,9 @@ final class GitRepoSearchViewController: UIViewController {
         resultTableView.register(GitRepoSearchResultTableViewCell.self)
         // セルの繰り返し表示を消す
         resultTableView.tableFooterView = UIView()
+        
+        resultTableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         bind()
     }
@@ -64,6 +69,7 @@ final class GitRepoSearchViewController: UIViewController {
                     self?.errorView.isHidden = true
                     self?.emptyView.isHidden = true
                     self?.resultTableView.isHidden = false
+                    self?.refreshControl.endRefreshing()
                     self?.resultTableView.reloadData()
                 case .empty:
                     self?.initialView.isHidden = true
@@ -80,6 +86,12 @@ final class GitRepoSearchViewController: UIViewController {
                 }
         })
         .store(in: &subscriptions)
+        
+    }
+    
+    @objc func refresh() {
+        // Pull To Refresh
+        viewModel.doAction(.reloadSearchResult)
     }
 }
 
