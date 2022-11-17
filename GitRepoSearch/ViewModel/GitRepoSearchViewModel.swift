@@ -32,9 +32,9 @@ final class GitRepoSearchViewModel {
                 return
             }
             
-            // 実リクエストを投げるのは少し待ってから行う
+            // 負荷軽減のため実リクエストを投げるのは少し待ってから行う
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                // 検索ワードが変更されているようであればリクエストは投げない
+                // 検索ワードが変更されているようであればリクエストは投げない（後続の処理が実行される）
                 guard self?.searchWord == word else { return }
                 
                 self?.state.send(.loading(isShowActivityIndicator: true)) // 検索ワードを変更した場合のみインジケータを表示

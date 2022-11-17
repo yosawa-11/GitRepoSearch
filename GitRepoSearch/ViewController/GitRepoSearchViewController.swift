@@ -112,15 +112,6 @@ extension GitRepoSearchViewController: UISearchBarDelegate {
         viewModel.doAction(.changeSearchWord(searchText))
     }
     
-    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if case .loading = viewModel.state.value {
-            // リクエスト中の場合はテキスト変更をさせない
-            return false
-        } else {
-            return true
-        }
-    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
