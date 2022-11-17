@@ -9,7 +9,7 @@ import Foundation
 
 enum GitRepoSearchState {
     case initial
-    case completed
+    case completed(isMoveToTop: Bool)
     case empty
     case rateLimit
     case error

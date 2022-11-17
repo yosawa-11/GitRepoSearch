@@ -85,12 +85,12 @@ final class GitRepoSearchViewModel {
             hasNext = response.totalCount / GitRepoSearchRequest.pageSize > page - 1
             items = response.items
             currentPage = page
-            state.send(.completed)
+            state.send(.completed(isMoveToTop: true))
         case (.success(let response), .getNextSearchResult):
             hasNext = response.totalCount / GitRepoSearchRequest.pageSize > page - 1
             items = items + response.items
             currentPage = page
-            state.send(.completed)
+            state.send(.completed(isMoveToTop: false))
         case (.failure(.rateLimitError), _):
             state.send(.rateLimit)
         case (.failure(let error), _):

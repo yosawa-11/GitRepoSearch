@@ -10,6 +10,7 @@ import Combine
 
 final class GitRepoSearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
+    
     @IBOutlet weak var initialView: UIView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var errorView: UIView!
@@ -52,57 +53,34 @@ final class GitRepoSearchViewController: UIViewController {
             .state
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
+                guard let sSelf = self else { return }
                 switch $0 {
                 case .initial:
-                    self?.initialView.isHidden = false
-                    self?.loadingView.isHidden = true
-                    self?.errorView.isHidden = true
-                    self?.emptyView.isHidden = true
-                    self?.rateLimitView.isHidden = true
-                    self?.resultTableView.isHidden = true
+                    sSelf.showStackContent(targetView: sSelf.initialView)
                 case .loading(true):
-                    self?.initialView.isHidden = true
-                    self?.loadingView.isHidden = false
-                    self?.errorView.isHidden = true
-                    self?.emptyView.isHidden = true
-                    self?.rateLimitView.isHidden = true
-                    self?.resultTableView.isHidden = true
+                    sSelf.showStackContent(targetView: sSelf.loadingView)
                 case .loading(false):
                     // インジケータを表示しない読み込み中に関しては何もしない
                     break
-                case .completed:
-                    self?.initialView.isHidden = true
-                    self?.loadingView.isHidden = true
-                    self?.errorView.isHidden = true
-                    self?.emptyView.isHidden = true
-                    self?.rateLimitView.isHidden = true
-                    self?.resultTableView.isHidden = false
-                    self?.refreshControl.endRefreshing()
-                    self?.resultTableView.reloadData()
-                    self?.resultTableView.flashScrollIndicators()
+                case .completed(let isMoveToTop):
+                    sSelf.showStackContent(targetView: sSelf.resultTableView)
+
+                    if isMoveToTop {
+                        // スクロール位置が残ってしまっている場合があるので、初期化する必要がある場合はゼロ位置へ
+                        sSelf.resultTableView.setContentOffset(.zero, animated: false)
+                    }
+                    
+                    sSelf.refreshControl.endRefreshing()
+                    sSelf.resultTableView.reloadData()
+                    sSelf.resultTableView.flashScrollIndicators()
                 case .empty:
-                    self?.initialView.isHidden = true
-                    self?.loadingView.isHidden = true
-                    self?.errorView.isHidden = true
-                    self?.emptyView.isHidden = false
-                    self?.rateLimitView.isHidden = true
-                    self?.resultTableView.isHidden = true
+                    sSelf.showStackContent(targetView: sSelf.emptyView)
                 case .error:
-                    self?.initialView.isHidden = true
-                    self?.loadingView.isHidden = true
-                    self?.errorView.isHidden = false
-                    self?.emptyView.isHidden = true
-                    self?.rateLimitView.isHidden = true
-                    self?.resultTableView.isHidden = true
+                    sSelf.showStackContent(targetView: sSelf.errorView)
                 case .rateLimit:
-                    self?.initialView.isHidden = true
-                    self?.loadingView.isHidden = true
-                    self?.errorView.isHidden = true
-                    self?.emptyView.isHidden = true
-                    self?.rateLimitView.isHidden = false
-                    self?.resultTableView.isHidden = true
+                    sSelf.showStackContent(targetView: sSelf.rateLimitView)
                     // 入力も初期化しておく
-                    self?.searchBar.text = ""
+                    sSelf.searchBar.text = ""
                 }
         })
         .store(in: &subscriptions)
@@ -116,6 +94,16 @@ final class GitRepoSearchViewController: UIViewController {
     
     @IBAction func tappedRateLimitConfirmButton(_ sender: Any) {
         viewModel.doAction(.checkRateLimitation)
+    }
+
+    private var stackViews: [UIView] {
+        [initialView, loadingView, errorView, emptyView, rateLimitView, resultTableView]
+    }
+    
+    private func showStackContent(targetView: UIView) {
+        targetView.isHidden = false
+        // 上記以外は非表示にする
+        stackViews.filter { $0 != targetView }.forEach { $0.isHidden = true }
     }
 }
 
