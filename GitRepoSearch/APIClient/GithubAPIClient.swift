@@ -20,6 +20,10 @@ final class GithubAPIClient {
     }
     
     func exec<T: GithubAPIRequest>(request: T, completion: @escaping (Result<T.ResponseType, GithubAPIError>) -> Void) {
+        // TODO: 本来はベタ書きをやめてconfigをClientに注入した上でそこから読み取る
+        var request = request
+        request.token = "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"
+        
         let task = urlSession
             .dataTask(with: request.asURLRequest) { [weak self] data, response, error in
                 print(response)
@@ -32,11 +36,9 @@ final class GithubAPIClient {
                 
                 guard let data = data,
                       let responseModel = try? self?.jsonDecoder.decode(T.ResponseType.self, from: data) else {
-//                    print("parse error: \(data)")
                     completion(.failure(.parseError))
                     return
                 }
-//                print(String(data: data, encoding: .utf8))
                 
                 completion(.success(responseModel))
             }

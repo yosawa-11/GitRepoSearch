@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class GitRepoSearchViewModel {
-    let client: GithubAPIClient
+    private let client: GithubAPIClient
     
     init(client: GithubAPIClient) {
         self.client = client
@@ -79,8 +79,9 @@ final class GitRepoSearchViewModel {
             items = items + response.items
             currentPage = page
             state.send(.completed)
-        default:
-            break
+        case (.failure(let error), _):
+            print(error)
+            state.send(.error)
         }
     }
 }
