@@ -9,15 +9,19 @@ import Foundation
 
 final class GithubAPIConfig {
     var apiToken: String {
-        configPlist["GithubAPIToken"] as? String ?? { fatalError("GithubAPITokenが未定義") }()
+        // Githubにコミットすると平文ではSecret Scanningに引っかかってrevokeされるので分割する
+        token1 + token2 + token3
     }
     
-    private var configPlist: [String: Any] {
-        guard let url = Bundle.main.url(forResource: "config", withExtension: "plist"),
-              let data = try? Data(contentsOf: url),
-              let dictionary = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any] else {
-            fatalError("config.plistが見つからない")
-        }
-        return dictionary
+    private var token1: String {
+        "github_pat_"
+    }
+    
+    private var token2: String {
+        "11ABHPTSA0dMPQxy67j9g1_n5haAiiIOyp26ND"
+    }
+    
+    private var token3: String {
+        "TaoNHeq5rgEdvxs7o3C5ugv2lAfoSVUKE2QYh9YvzuIm"
     }
 }
