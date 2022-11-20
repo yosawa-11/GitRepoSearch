@@ -20,17 +20,22 @@ final class GitRepoSearchViewController: UIViewController {
     
     var viewModel: GitRepoSearchViewModel!
     
-    var subscriptions = Set<AnyCancellable>()
-    
-    var refreshControl = UIRefreshControl()
+    private var subscriptions = Set<AnyCancellable>()
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // NOTE: DIライブラリで入れ込みたい
         let jsonDecoder = JSONDecoder()
+        // API定義はsnake_caseなためJSONデコーダで変換
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        let client = GithubAPIClient(urlSession: URLSession(configuration: .default), jsonDecoder: jsonDecoder)
+        let config = GithubAPIConfig()
+        let client = GithubAPIClient(
+            urlSession: URLSession(configuration: .default),
+            jsonDecoder: jsonDecoder,
+            config: config
+        )
         viewModel = GitRepoSearchViewModel(client: client)
         
         // 初期セットアップ
@@ -139,15 +144,24 @@ extension GitRepoSearchViewController: UITableViewDelegate {
     }
 }
 
-private enum GitRepoSearchSection: Int {
+private enum GitRepoSearchSection: Int, CaseIterable {
     case gitRepoItemCell = 0
     case pagingIndicatorCell = 1
+    
+    static func sectionCount(hasNext: Bool) -> Int {
+        // 次の要素があるかどうかでセクション数を変化
+        let allCount = Self.allCases.count
+        if hasNext {
+            return allCount
+        }
+        // ない場合は一つ減らす
+        return allCount - 1
+    }
 }
 
 extension GitRepoSearchViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        // 次の要素がある場合は読み込み用のセクションを追加するため2として返す
-        viewModel.hasNext ? 2 : 1
+        GitRepoSearchSection.sectionCount(hasNext: viewModel.hasNext)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

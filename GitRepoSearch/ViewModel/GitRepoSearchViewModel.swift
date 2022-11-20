@@ -15,11 +15,11 @@ final class GitRepoSearchViewModel {
         self.client = client
     }
     
-    var state = CurrentValueSubject<GitRepoSearchState, Never>(.initial)
+    private(set) var state = CurrentValueSubject<GitRepoSearchState, Never>(.initial)
     
-    var items: [GitRepoItem] = []
+    private(set) var items: [GitRepoItem] = []
     private var currentPage = 1
-    var hasNext = false
+    private(set) var hasNext = false
     private var searchWord = ""
     
     func doAction(_ action: GitRepoSearchAction) {

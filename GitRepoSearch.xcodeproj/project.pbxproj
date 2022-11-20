@@ -33,6 +33,7 @@
 		A5FC641329267F13007FC895 /* GitRateLimitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC641229267F13007FC895 /* GitRateLimitResponse.swift */; };
 		A5FC641529267FE8007FC895 /* GitRateLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC641429267FE8007FC895 /* GitRateLimit.swift */; };
 		A5FC64172926810D007FC895 /* GitRateLimitResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC64162926810D007FC895 /* GitRateLimitResources.swift */; };
+		A5FC64192929E39D007FC895 /* GithubAPIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC64182929E39D007FC895 /* GithubAPIConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		A5FC641229267F13007FC895 /* GitRateLimitResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRateLimitResponse.swift; sourceTree = "<group>"; };
 		A5FC641429267FE8007FC895 /* GitRateLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRateLimit.swift; sourceTree = "<group>"; };
 		A5FC64162926810D007FC895 /* GitRateLimitResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRateLimitResources.swift; sourceTree = "<group>"; };
+		A5FC64182929E39D007FC895 /* GithubAPIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPIConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,17 +98,17 @@
 		A5FC63D22925FB29007FC895 /* GitRepoSearch */ = {
 			isa = PBXGroup;
 			children = (
+				A5FC63E12925FB2C007FC895 /* Info.plist */,
 				A5FC63D32925FB29007FC895 /* AppDelegate.swift */,
 				A5FC63D52925FB29007FC895 /* SceneDelegate.swift */,
-				A5FC6405292625A2007FC895 /* Utility */,
-				A5FC63F7292604BC007FC895 /* APIClient */,
-				A5FC63F029260283007FC895 /* Model */,
-				A5FC63E92925FC22007FC895 /* View */,
-				A5FC63E82925FC1C007FC895 /* ViewModel */,
-				A5FC63E72925FC12007FC895 /* ViewController */,
 				A5FC63DC2925FB2C007FC895 /* Assets.xcassets */,
+				A5FC63F7292604BC007FC895 /* APIClient */,
 				A5FC63DE2925FB2C007FC895 /* LaunchScreen.storyboard */,
-				A5FC63E12925FB2C007FC895 /* Info.plist */,
+				A5FC63F029260283007FC895 /* Model */,
+				A5FC6405292625A2007FC895 /* Utility */,
+				A5FC63E92925FC22007FC895 /* View */,
+				A5FC63E72925FC12007FC895 /* ViewController */,
+				A5FC63E82925FC1C007FC895 /* ViewModel */,
 			);
 			path = GitRepoSearch;
 			sourceTree = "<group>";
@@ -114,8 +116,8 @@
 		A5FC63E72925FC12007FC895 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A5FC63D72925FB29007FC895 /* GitRepoSearchViewController.swift */,
 				A5FC63D92925FB29007FC895 /* GitRepoSearchViewController.storyboard */,
+				A5FC63D72925FB29007FC895 /* GitRepoSearchViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -142,15 +144,15 @@
 		A5FC63F029260283007FC895 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A5FC63F129260307007FC895 /* GitRepoSearchResponse.swift */,
-				A5FC63F3292603C1007FC895 /* GitRepoItem.swift */,
-				A5FC63FF29260D87007FC895 /* GitRepoSearchRequest.swift */,
-				A5FC640129261A10007FC895 /* GitRepoSearchAction.swift */,
-				A5FC640329261A72007FC895 /* GitRepoSearchState.swift */,
-				A5FC641029267ED1007FC895 /* GitRateLimitRequest.swift */,
-				A5FC641229267F13007FC895 /* GitRateLimitResponse.swift */,
 				A5FC641429267FE8007FC895 /* GitRateLimit.swift */,
+				A5FC641029267ED1007FC895 /* GitRateLimitRequest.swift */,
 				A5FC64162926810D007FC895 /* GitRateLimitResources.swift */,
+				A5FC641229267F13007FC895 /* GitRateLimitResponse.swift */,
+				A5FC63F3292603C1007FC895 /* GitRepoItem.swift */,
+				A5FC640129261A10007FC895 /* GitRepoSearchAction.swift */,
+				A5FC63FF29260D87007FC895 /* GitRepoSearchRequest.swift */,
+				A5FC63F129260307007FC895 /* GitRepoSearchResponse.swift */,
+				A5FC640329261A72007FC895 /* GitRepoSearchState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,8 +160,9 @@
 		A5FC63F7292604BC007FC895 /* APIClient */ = {
 			isa = PBXGroup;
 			children = (
-				A5FC63F52926049E007FC895 /* GithubAPIClient.swift */,
 				A5FC63F8292604D0007FC895 /* APIRequest.swift */,
+				A5FC63F52926049E007FC895 /* GithubAPIClient.swift */,
+				A5FC64182929E39D007FC895 /* GithubAPIConfig.swift */,
 				A5FC63FA292605B6007FC895 /* GithubAPIRequest.swift */,
 			);
 			path = APIClient;
@@ -168,9 +171,9 @@
 		A5FC6405292625A2007FC895 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				A5FC6406292625BD007FC895 /* UITableView+RegisterNib.swift */,
-				A5FC640A292627BC007FC895 /* UITableView+DequeueCell.swift */,
 				A5FC64082926278F007FC895 /* NSObject+Name.swift */,
+				A5FC640A292627BC007FC895 /* UITableView+DequeueCell.swift */,
+				A5FC6406292625BD007FC895 /* UITableView+RegisterNib.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5FC641129267ED1007FC895 /* GitRateLimitRequest.swift in Sources */,
+				A5FC64192929E39D007FC895 /* GithubAPIConfig.swift in Sources */,
 				A5FC63ED2925FE2A007FC895 /* GitRepoSearchResultTableViewCell.swift in Sources */,
 				A5FC63FB292605B6007FC895 /* GithubAPIRequest.swift in Sources */,
 				A5FC63F4292603C1007FC895 /* GitRepoItem.swift in Sources */,
