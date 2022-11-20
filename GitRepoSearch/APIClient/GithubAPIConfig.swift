@@ -9,6 +9,6 @@ import Foundation
 
 final class GithubAPIConfig {
     var apiToken: String {
-        "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"
+        "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"
     }
 }
