@@ -34,6 +34,7 @@
 		A5FC641529267FE8007FC895 /* GitRateLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC641429267FE8007FC895 /* GitRateLimit.swift */; };
 		A5FC64172926810D007FC895 /* GitRateLimitResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC64162926810D007FC895 /* GitRateLimitResources.swift */; };
 		A5FC64192929E39D007FC895 /* GithubAPIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC64182929E39D007FC895 /* GithubAPIConfig.swift */; };
+		A5FC641B2929F749007FC895 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5FC641A2929F749007FC895 /* config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		A5FC641429267FE8007FC895 /* GitRateLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRateLimit.swift; sourceTree = "<group>"; };
 		A5FC64162926810D007FC895 /* GitRateLimitResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRateLimitResources.swift; sourceTree = "<group>"; };
 		A5FC64182929E39D007FC895 /* GithubAPIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPIConfig.swift; sourceTree = "<group>"; };
+		A5FC641A2929F749007FC895 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				A5FC63E92925FC22007FC895 /* View */,
 				A5FC63E72925FC12007FC895 /* ViewController */,
 				A5FC63E82925FC1C007FC895 /* ViewModel */,
+				A5FC641A2929F749007FC895 /* config.plist */,
 			);
 			path = GitRepoSearch;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			files = (
 				A5FC63E02925FB2C007FC895 /* LaunchScreen.storyboard in Resources */,
 				A5FC640F292679E1007FC895 /* PagingIndicatorTableViewCell.xib in Resources */,
+				A5FC641B2929F749007FC895 /* config.plist in Resources */,
 				A5FC63DD2925FB2C007FC895 /* Assets.xcassets in Resources */,
 				A5FC63DB2925FB29007FC895 /* GitRepoSearchViewController.storyboard in Resources */,
 				A5FC63EF2925FE56007FC895 /* GitRepoSearchResultTableViewCell.xib in Resources */,
