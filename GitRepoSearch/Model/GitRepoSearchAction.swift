@@ -8,8 +8,12 @@
 import Foundation
 
 enum GitRepoSearchAction {
-    case changeSearchWord(String)
-    case reloadSearchResult
-    case getNextSearchResult
+    case search(SearchAction)
     case checkRateLimitation
+}
+
+enum SearchAction {
+    case changeWord(String)
+    case reloadResult
+    case getNextResult
 }

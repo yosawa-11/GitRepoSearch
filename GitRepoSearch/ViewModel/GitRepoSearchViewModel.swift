@@ -23,8 +23,17 @@ final class GitRepoSearchViewModel {
     private var searchWord = ""
     
     func doAction(_ action: GitRepoSearchAction) {
-        switch action {
-        case .changeSearchWord(let word):
+        switch (action, state.value) {
+        case (.search, .rateLimit):
+            // 制限がかかっている場合は一度チェックしてから検索を実行する
+            sendCheckRateRequest { [weak self] isOK in
+                if isOK {
+                    self?.doAction(action)
+                } else {
+                    self?.state.send(.rateLimit)
+                }
+            }
+        case (.search(.changeWord(let word)), _):
             searchWord = word
             
             guard !word.isEmpty else {
@@ -40,24 +49,21 @@ final class GitRepoSearchViewModel {
                 self?.state.send(.loading(isShowActivityIndicator: true)) // 検索ワードを変更した場合のみインジケータを表示
                 self?.sendSearchRequest(action: action, searchWord: word)
             }
-        case .reloadSearchResult:
+        case (.search(.reloadResult), _):
             state.send(.loading(isShowActivityIndicator: false))
             sendSearchRequest(action: action, searchWord: searchWord)
-        case .getNextSearchResult:
+        case (.search(.getNextResult), _):
             // 読み込み中でない場合のみ実施
             if case .loading = state.value { } else {
                 state.send(.loading(isShowActivityIndicator: false))
                 sendSearchRequest(action: action, searchWord: searchWord, page: currentPage + 1)
             }
-        case .checkRateLimitation:
+        case (.checkRateLimitation, _):
             // レート制限のチェック
-            state.send(.loading(isShowActivityIndicator: true))
-            let request = GitRateLimitRequest()
-            client.exec(request: request) { [weak self] result in
-                switch result {
-                case .success(let response) where response.resources.search.remaining > 0:
+            sendCheckRateRequest { [weak self] isOK in
+                if isOK {
                     self?.state.send(.initial)
-                default:
+                } else {
                     self?.state.send(.rateLimit)
                 }
             }
@@ -73,8 +79,8 @@ final class GitRepoSearchViewModel {
     
     private func handle(action: GitRepoSearchAction, page: Int, result: Result<GitRepoSearchResponse, GithubAPIError>) {
         switch (result, action) {
-        case (.success(let response), .changeSearchWord(_)),
-            (.success(let response), .reloadSearchResult):
+        case (.success(let response), .search(.changeWord)),
+            (.success(let response), .search(.reloadResult)):
             guard response.totalCount != 0 else {
                 // 0件パターン
                 state.send(.empty)
@@ -86,7 +92,7 @@ final class GitRepoSearchViewModel {
             items = response.items
             currentPage = page
             state.send(.completed(isMoveToTop: true))
-        case (.success(let response), .getNextSearchResult):
+        case (.success(let response), .search(.getNextResult)):
             hasNext = response.totalCount / GitRepoSearchRequest.pageSize > page - 1
             items = items + response.items
             currentPage = page
@@ -99,6 +105,20 @@ final class GitRepoSearchViewModel {
         case (_, .checkRateLimitation):
             // 実行されないので何もしない
             break
+        }
+    }
+    
+    private func sendCheckRateRequest(completion: @escaping (Bool) -> Void) {
+        state.send(.loading(isShowActivityIndicator: true))
+        let request = GitRateLimitRequest()
+        client.exec(request: request) { result in
+            switch result {
+            case .success(let response) where response.resources.search.remaining > 0:
+                // 解除されていればtrue
+                completion(true)
+            default:
+                completion(false)
+            }
         }
     }
 }

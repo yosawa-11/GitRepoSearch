@@ -94,7 +94,7 @@ final class GitRepoSearchViewController: UIViewController {
     
     @objc func refresh() {
         // Pull To Refresh
-        viewModel.doAction(.reloadSearchResult)
+        viewModel.doAction(.search(.reloadResult))
     }
     
     @IBAction func tappedRateLimitConfirmButton(_ sender: Any) {
@@ -114,7 +114,7 @@ final class GitRepoSearchViewController: UIViewController {
 
 extension GitRepoSearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.doAction(.changeSearchWord(searchText))
+        viewModel.doAction(.search(.changeWord(searchText)))
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -133,7 +133,7 @@ extension GitRepoSearchViewController {
         
         // スクロールが最下部の要素になったら次を取得
         if scrollPositon > scrollView.contentSize.height - scrollView.bounds.height - margin {
-            viewModel.doAction(.getNextSearchResult)
+            viewModel.doAction(.search(.getNextResult))
         }
     }
 }
